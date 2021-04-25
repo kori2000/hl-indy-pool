@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  nodes:
+    build: 
+      context: ./network
+      dockerfile: indy-pool.dockerfile
+    container_name: nodes
+    ports:
+      - 9701-9708:9701-9708
+
+  fileserver:
+    image: halverneus/static-file-server:latest
+    container_name: fileserver
+    ports:
+      - 4200:8080
+    volumes:
+      - ./network/genesis:/web
+    depends_on: 
+      - nodes
+
+volumes:
+  genesis:
