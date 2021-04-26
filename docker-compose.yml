@@ -6,12 +6,14 @@ services:
       context: ./network
       dockerfile: indy-pool.dockerfile
     container_name: nodes
+    restart: always
     ports:
       - 9701-9708:9701-9708
 
   fileserver:
     image: halverneus/static-file-server:latest
     container_name: fileserver
+    restart: always
     ports:
       - 4200:8080
     volumes:
